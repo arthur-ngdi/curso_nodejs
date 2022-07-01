@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+</head>
+<body>
+
+    <%- include('partials/header.ejs') %>
+
+    <h1>Posts</h1>
+    <h2>Veja abaixo alguns posts</h2>
+    <div class = "posts">
+        <% posts.forEach((item) => { %>
+            <div class = "post">
+                <h3><%= item.title %></h3>
+                <p><%= item.text %></p>
+                <% if(item.stars){ %>
+                    <% for( let index = 0; index < item.stars; index++ ) { %>
+                        <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjXUftTKhHZmoORzVmEEmEpMwgUawLOMIwpw&usqp=CAU" width="20'">
+                    <% } %>
+                <% } %> 
+            </div>    
+        <% }) %> 
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+
+    <%- include('partials/foot.ejs') %>
+
+</body>
+</html>
