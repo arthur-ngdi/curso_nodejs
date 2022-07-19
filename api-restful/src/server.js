@@ -1,14 +1,34 @@
 const express = require('express');
-//const path = require('path');
+const cors = require('cors');
 
 const routes = require('./routes/routes');
 const db = require('./database/db');
 
 const app = express();
 
-
 //* Conexão com o banco de dados
 db.connect();
+
+const allowedOrigins = [
+    'http://localhost:5500',
+    'http://www.app.com.br'
+]
+
+//* habilita CORS
+app.use(cors({
+    origin: function(origin, callback){
+        let allowed = true;
+
+        //mobile app
+        if(!origin) allowed = true;
+
+        if(!allowedOrigins.includes(origin)) allowed = false;
+
+        callback(null, allowed);
+    }
+
+
+}));
 
 //* habilita server para receber dados no formato JSON
 app.use(express.json());
